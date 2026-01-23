@@ -185,3 +185,36 @@ body{
         bottom: 100%;
     }
 }
+
+/* --- Novas regras para o fluxo interativo --- */
+
+.step {
+    display: none; /* Esconde por padrão */
+    animation: slideIn 0.4s ease forwards;
+}
+
+.step.active {
+    display: block; /* Mostra apenas o ativo */
+}
+
+/* Estilo para os botões "Próximo" que seguem seu padrão */
+.btn-next {
+    background: transparent;
+    border: 1px solid #ececec;
+    color: #ececec;
+    padding: 8px 20px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-family: 'Poppins';
+    transition: 0.3s;
+    float: right;
+}
+
+.btn-next:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateX(20px); }
+    to { opacity: 1; transform: translateX(0); }
+}
