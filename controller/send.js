@@ -163,10 +163,10 @@ document.getElementById("form").addEventListener("submit", function(e) {
                 "Accept": "application/json"
             },
             body: JSON.stringify({
-                access_key: "SUA_CHAVE_AQUI", // <--- COLOQUE SUA CHAVE AQUI
-                subject: "Nova Cotação: " + (data.cidade || "Lead Site"),
+                access_key: "8cfc61ff-fb2b-4a53-9c0b-4b72b77694a9",
+                subject: "Nova Cotação: " + (data.name || "Lead Site"),
                 from_name: "Simulador de Planos",
-                ...data // Envia todos os campos do formulário (cnpj, idades, hospitais, etc)
+                ...data
             })
         });
         // --- FIM DA ADIÇÃO ---
