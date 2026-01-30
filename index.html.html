@@ -4,68 +4,201 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./public/css/style.css">
-    <link rel="shortcut icon" href="./public/img/logo.png" type="image/x-icon">
-    <title>Login</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.26.17/dist/sweetalert2.min.css">
+    <link rel="shortcut icon" href="./public/img/teste.png" type="image/x-icon">
+    <title>Cotação</title>
 </head>
 <body>
+    
     <div class="login-box">
-        <h2 id="form-title">Cadastro</h2>
-        <form id="form">
-            <div class="step active" data-step="1">
-                <div class="user-box">
-                    <input type="text" name="nome" id="nome" required>
-                    <label>Nome</label> 
+        <div class="logo-side">
+            <img src="./public/img/logo.png" alt="Paz Consultoria" class="logo-img">
+        </div>
+        <div class="form-side">
+            <form id="form">
+                <div class="step active" data-step="1">
+                    <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+                    <h2>1 - POSSUI CNPJ?*</h2>
+                    <div class="options-container">
+                        <button type="button" class="btn-option" onclick="selectAndNext('cnpj_status', 'POSSUO CNPJ')">
+                            <span class="option-letter">A</span><span class="option-text">✅ POSSUO CNPJ</span>
+                        </button>
+                        <button type="button" class="btn-option" onclick="selectAndNext('cnpj_status', 'MEI')">
+                            <span class="option-letter">B</span><span class="option-text">✅ MEI</span>
+                        </button>
+                        <button type="button" class="btn-option" onclick="selectAndNext('cnpj_status', 'SOMENTE CPF')">
+                            <span class="option-letter">C</span><span class="option-text">❌ SOMENTE CPF</span>
+                        </button>
+                    </div>
+                    <div class="button-group">
+                        <button type="button" class="btn-next" onclick="nextStep()">Próximo</button>
+                    </div>
+                    <input type="hidden" name="cnpj_status" id="cnpj_status">
                 </div>
-                <button type="button" class="btn-next" onclick="nextStep()">Próximo</button>
-            </div>
-
-            <div class="step" data-step="2">
-                <div class="user-box">
-                    <input type="text" name="email" id="email" required>
-                    <label>E-mail</label> 
+    
+                <div class="step" data-step="2">
+                    <h2>2 - EM QUAL OPÇÃO VOCÊ MELHOR SE ENCAIXA?*</h2>
+                    <div class="options-container">
+                        <button type="button" class="btn-option" onclick="selectAndJump('status_plano', 'TENHO PLANO', 3)">
+                            <span class="option-text">✅ TENHO UM PLANO DE SAÚDE</span>
+                        </button>
+                        <button type="button" class="btn-option" onclick="selectAndJump('status_plano', 'NÃO TENHO PLANO', 5)">
+                            <span class="option-text">❌ NÃO TENHO PLANO DE SAÚDE</span>
+                        </button>
+                    </div>
+                    <input type="hidden" name="status_plano" id="status_plano">
+                    <div class="button-group">
+                        <button type="button" class="btn-prev" onclick="prevStep()">Voltar</button>
+                        <button type="button" class="btn-next" onclick="nextStep()">Próximo</button>
+                    </div>
                 </div>
-                <button type="button" class="btn-next" onclick="nextStep()">Próximo</button>
-            </div>
-
-            <div class="step" data-step="3">
-                <div class="user-box">
-                    <input type="text" name="telefone" id="telefone" required>
-                    <label>Telefone</label>
+    
+                <div class="step" data-step="3">
+                    <h2>3 - QUAL O SEU PLANO DE SAÚDE ATUAL?</h2>
+                    
+                    <div class="options-container">
+                        <button type="button" class="btn-option" onclick="selectPlano('AMIL')">
+                            <span class="option-text">AMIL</span>
+                        </button>
+                        <button type="button" class="button btn-option" onclick="selectPlano('PORTO SEGURO')">
+                            <span class="option-text">PORTO SEGURO</span>
+                        </button>
+                        <button type="button" class="btn-option" onclick="selectPlano('SULAMÉRICA')">
+                            <span class="option-text">SULAMÉRICA</span>
+                        </button>
+                        <button type="button" class="btn-option" onclick="selectPlano('BRADESCO')">
+                            <span class="option-text">BRADESCO</span>
+                        </button>
+                        <button type="button" class="btn-option" onclick="selectPlano('OMINT')">
+                            <span class="option-text">OMINT</span>
+                        </button>
+                        <button type="button" class="btn-option" onclick="selectPlano('NOTREDAME')">
+                            <span class="option-text">NOTREDAME</span>
+                        </button>
+                        <button type="button" class="btn-option" onclick="selectPlano('UNIMED')">
+                            <span class="option-text">UNIMED</span>
+                        </button>
+                        <button type="button" class="btn-option" onclick="selectPlano('MEDSÊNIOR')">
+                            <span class="option-text">MEDSÊNIOR</span>
+                        </button>
+                        <button type="button" class="btn-option" onclick="selectPlano('OUTRO')">
+                            <span class="option-text">OUTRO (NÃO LISTADO)</span>
+                        </button>
+                    </div>
+    
+                    <div id="extra-plano" class="user-box" style="display:none; margin-top: 25px;">
+                        <input type="text" name="outro_plano_nome" id="outro_plano_nome" placeholder="Digite o nome do seu plano">
+                    </div>
+    
+                    <input type="hidden" name="plano_atual" id="plano_atual">
+    
+                    <div class="button-group">
+                        <button type="button" class="btn-prev" onclick="prevStep()">Voltar</button>
+                        <button type="button" class="btn-next" id="btn-next-plano" onclick="nextStep()">Próximo</button>
+                    </div>
                 </div>
-                <button type="button" class="btn-next" onclick="nextStep()">Próximo</button>
-            </div>
-
-            <div class="step" data-step="4">
-                <div class="user-box">
-                    <input type="text" name="cidade" id="cidade" required>
-                    <label>Cidade</label>
+    
+                <div class="step" data-step="4">
+                    <h2>4 - QUAL O CUSTO DO SEU PLANO ATUAL?</h2>
+                    <div class="options-container">
+                        <button type="button" class="btn-option" onclick="selectAndNext('custo_plano', '500 a 3 mil')">
+                            <span class="option-letter">A</span><span class="option-text">Entre R$ 500,00 a R$ 3.000,00</span>
+                        </button>
+                        <button type="button" class="btn-option" onclick="selectAndNext('custo_plano', '3 mil a 4 mil')">
+                            <span class="option-letter">B</span><span class="option-text">Entre R$ 3.000,00 a R$ 4.000,00</span>
+                        </button>
+                        <button type="button" class="btn-option" onclick="selectAndNext('custo_plano', 'mais de 4 mil')">
+                            <span class="option-letter">C</span><span class="option-text">+ Mais de R$ 4.000,00</span>
+                        </button>
+                    </div>
+                    <input type="hidden" name="custo_plano" id="custo_plano">
+                    <div class="button-group">
+                        <button type="button" class="btn-prev" onclick="prevStep()">Voltar</button>
+                        <button type="button" class="btn-next" onclick="nextStep()">Próximo</button>
+                    </div>
                 </div>
-                <button type="button" class="btn-next" onclick="nextStep()">Próximo</button>
-            </div>
-
-            <div class="step" data-step="5">
-                <div class="user-box">
-                    <input type="text" name="plano" id="plano" required>
-                    <label>Tem plano de saúde?</label>
+    
+                <div class="step" data-step="5">
+                    <h2>5 - QUANTIDADE DE VIDAS PARA COTAÇÃO?</h2>
+                    <div class="options-container">
+                        <button type="button" class="btn-option" onclick="selectAndNext('qtd_vidas', '1 vida')">
+                            <span class="option-letter">A</span><span class="option-text">1 vida</span>
+                        </button>
+                        <button type="button" class="btn-option" onclick="selectAndNext('qtd_vidas', '2 vidas')">
+                            <span class="option-letter">B</span><span class="option-text">2 vidas</span>
+                        </button>
+                        <button type="button" class="btn-option" onclick="selectAndNext('qtd_vidas', '3 vidas')">
+                            <span class="option-letter">C</span><span class="option-text">3 vidas</span>
+                        </button>
+                        <button type="button" class="btn-option" onclick="selectAndNext('qtd_vidas', '4 vidas +')">
+                            <span class="option-letter">D</span><span class="option-text">4 vidas +</span>
+                        </button>
+                    </div>
+                    <input type="hidden" name="qtd_vidas" id="qtd_vidas">
+                    <div class="button-group">
+                        <button type="button" class="btn-prev" onclick="prevStep()">Voltar</button>
+                        <button type="button" class="btn-next" onclick="nextStep()">Próximo</button>
+                    </div>
                 </div>
-                <button type="button" class="btn-next" onclick="nextStep()">Próximo</button>
-            </div>
-
-            <div class="step" data-step="6">
-                <div class="user-box">
-                    <input type="text" name="hospital" id="hospital" required>
-                    <label>Hospital de preferência</label>
+    
+                <div class="step" data-step="6">
+                    <h2>6 - QUAIS AS IDADES?</h2>
+                    <div class="user-box">
+                        <input type="text" name="idades" id="idades" required placeholder="Ex: 25, 30, 10">
+                    </div>
+                    <div class="button-group">
+                        <button type="button" class="btn-prev" onclick="prevStep()">Voltar</button>
+                        <button type="button" class="btn-next" onclick="nextStep()">Próximo</button>
+                    </div>
                 </div>
-                <button type="submit" class="btn-animation">
-                    <span></span><span></span><span></span><span></span>
-                    Enviar
-                </button>
-            </div>
-        </form>
+    
+                <div class="step" data-step="7">
+                    <h2>7 - HOSPITAIS / LABORATÓRIOS DE PREFERÊNCIA?</h2>
+                    <div class="user-box">
+                        <input type="text" name="hospitais" id="hospitais" required placeholder="Digite sua preferência">
+                    </div>
+                    <div class="button-group">
+                        <button type="button" class="btn-prev" onclick="prevStep()">Voltar</button>
+                        <button type="button" class="btn-next" onclick="nextStep()">Próximo</button>
+                    </div>
+                </div>
+    
+                <div class="step" data-step="8">
+                    <h2>8 - CIDADE ONDE VOCÊ MORA ?</h2>
+                    <div class="user-box">
+                        <input type="text" name="cidade" id="cidade" required placeholder="Sua cidade">
+                    </div>
+                    <div class="button-group">
+                        <button type="button" class="btn-prev" onclick="prevStep()">Voltar</button>
+                        <button type="button" class="btn-next" onclick="nextStep()">Próximo</button>
+                    </div>
+                </div>
+                <div class="step" data-step="9">
+                    <h2>9 - DIGITE SEU NOME</h2>
+                    <div class="user-box">
+                        <input type="text" name="name" id="name" placeholder="Seu nome">
+                    </div>
+                    <div class="button-group">
+                        <button type="button" class="btn-prev" onclick="prevStep()">Voltar</button>
+                        <button type="button" class="btn-next" onclick="nextStep()">Próximo</button>
+                    </div>
+                </div>
+                <div class="step" data-step="10">
+                    <h2>10 - DIGITE SEU NÚMERO</h2>
+                    <div class="user-box">
+                        <input type="text" name="phonenumber" id="phonenumber" placeholder="(00) 00000-0000" maxlength="15" required>
+                    </div>
+                    <div class="button-group">
+                        <button type="button" class="btn-prev" onclick="prevStep()">Voltar</button>
+                        <button type="submit" class="btn-animation">Enviar Cadastro</button>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="./public/js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.26.17/dist/sweetalert2.all.min.js"></script>
     <script src="./controller/send.js"></script>
 </body>
 </html>

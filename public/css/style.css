@@ -1,58 +1,81 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-html{
+/* --- Configurações Gerais --- */
+html, body {
     height: 100%;
-}
-
-body{
     margin: 0;
     padding: 0;
-    font-family: 'Poppins', 'Courier New', Courier, monospace;
-    background: linear-gradient(135deg, #3090db, #1e40af, #ececec);
-    background-attachment: fixed; 
-    height: 100vh;
+    font-family: 'Poppins', sans-serif;
 }
 
+body {
+    background: linear-gradient(135deg, #3090db, #1e40af, #2563eb);
+    background-attachment: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
+/* --- Container Principal (Glassmorphism) --- */
 .login-box {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 400px;
-    padding: 40px;
-    transform: translate(-50%, -50%);
-    
-    /* 1. Fundo branco com muita transparência */
+    display: flex;
+    flex-direction: column;
+    max-width: 95%;
+    min-height: 550px;
     background: rgba(255, 255, 255, 0.1);
-    
-    /* 2. O desfoque que você já adicionou (perfeito!) */
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px); /* Suporte para Safari */
-    
-    /* 3. Borda fina e clara para simular o corte do vidro */
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.2);
-    
-    /* 4. Ajuste da sombra (menos preta, mais suave) */
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
-    
-    border-radius: 15px; /* Bordas um pouco mais arredondadas combinam melhor */
-    box-sizing: border-box;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
 }
 
-.login-box h2{
+/* --- Lado Esquerdo: Logo --- */
+.logo-side {
+    flex: 1;
+    /* background: rgba(255, 255, 255, 0.05); */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    /* border-right: 1px solid rgba(255, 255, 255, 0.1); */
+}
+
+.logo-img {
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    filter: drop-shadow(0 10px 15px rgba(0,0,0,0.2));
+    animation: fadeIn 1s ease;
+}
+
+/* --- Lado Direito: Formulário --- */
+.form-side {
+    flex: 1.2;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.login-box h2 {
     margin: 0 0 30px;
     padding: 0;
     color: #ececec;
     text-align: center;
+    font-size: 22px;
 }
 
-.login-box .user-box{
+/* --- Inputs e Caixas de Texto --- */
+.login-box .user-box {
     position: relative;
 }
 
-.login-box .user-box input{
+.login-box .user-box input {
     width: 100%;
-    padding: 10px 0%;
+    padding: 10px 0;
     font-size: 16px;
     color: #ececec;
     margin-bottom: 30px;
@@ -62,162 +85,150 @@ body{
     background: transparent;
 }
 
-.login-box .user-box label{
-    position: absolute;
-    top: 0;
-    left: 0;
-    padding: 10px 0;
-    font-size: 16px;
-    color: #ececec;
-    pointer-events: none;
-    transition: .5s;
+.login-box .user-box input::placeholder {
+    color: rgba(236, 236, 236, 0.6);
 }
 
-.login-box .user-box input:focus ~ label,
-.login-box .user-box input:valid ~ label{
-    top: -20px;
-    left: 0;
-    color: #ececec;
-    font-size: 12px;
+/* --- Botões de Opção (Seleção) --- */
+.options-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 20px;
 }
 
-.login-box form .btn-animation{
-    position: relative;
-    display: inline-block;
-    padding: 10px 20px;
+.btn-option {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
     color: #ececec;
-    font-size: 16px;
-    font-weight: 600;
-    text-decoration: none;
+    font-family: 'Poppins';
+}
+
+.btn-option:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateX(8px);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.option-letter {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    padding: 2px 10px;
+    font-weight: bold;
+    margin-right: 15px;
+    font-size: 14px;
+    color: #fff;
+}
+
+.option-text {
+    font-weight: 500;
+    font-size: 14px;
     text-transform: uppercase;
-    overflow: hidden;
-    transition: .5s;
-    margin-top: 40px;
-    letter-spacing: 4px;
 }
 
-.login-box .btn-animation:hover{
-    background-color: #ececec;
-    color: #3090db;
-    border-radius: 5px;
-    box-shadow: 0 0 5px #ececec,
-                0 0 25px #ececec,
-                0 0 50px #ececec,
-                0 0 100px #ececec;
+/* --- Navegação e Animações de Botão --- */
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
 }
 
-.login-box .btn-animation span{
-    position: absolute;
-    display: block;
-}
-
-.login-box .btn-animation span:nth-child(1){
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, #ececec);
-    animation: btn-anim1 1s linear infinite;
-}
-
-@keyframes btn-anim1{
-    0%{
-        left: -100%;
-    }
-    50%,100%{
-        left: 100%;
-    }
-}
-
-.login-box .btn-animation span:nth-child(2){
-    top: -100%;
-    right: 0;
-    width: 2px;
-    height: 100%;
-    background: linear-gradient(180deg, transparent, #ececec);
-    animation: btn-anim2 1s linear infinite;
-    animation-delay: .25s;
-}
-
-@keyframes btn-anim2{
-    0%{
-        top: -100%;
-    }
-    50%,100%{
-        top: 100%;
-    }
-}
-
-.login-box .btn-animation span:nth-child(3){
-    bottom: 0;
-    right: -100%;
-    width: 100%;
-    height: 2px;
-    background: linear-gradient(270deg, transparent, #ececec);
-    animation: btn-anim3 1s linear infinite;
-    animation-delay: .5s;
-}
-
-@keyframes btn-anim3{
-    0%{
-        right: -100%;
-    }
-    50%,100%{
-        right: 100%;
-    }
-}
-
-.login-box .btn-animation span:nth-child(4){
-    bottom: -100%;
-    left: 0;
-    width: 2px;
-    height: 100%;
-    background: linear-gradient(360deg, transparent, #ececec);
-    animation: btn-anim4 1s linear infinite;
-    animation-delay: .75s;
-}
-
-@keyframes btn-anim4{
-    0%{
-        bottom: -100%;
-    }
-    50%,100%{
-        bottom: 100%;
-    }
-}
-
-/* --- Novas regras para o fluxo interativo --- */
-
-.step {
-    display: none; /* Esconde por padrão */
-    animation: slideIn 0.4s ease forwards;
-}
-
-.step.active {
-    display: block; /* Mostra apenas o ativo */
-}
-
-/* Estilo para os botões "Próximo" que seguem seu padrão */
-.btn-next {
+.btn-next, .btn-prev, .btn-animation {
     background: transparent;
     border: 1px solid #ececec;
     color: #ececec;
-    padding: 8px 20px;
+    padding: 10px 25px;
     cursor: pointer;
     border-radius: 4px;
     font-family: 'Poppins';
     transition: 0.3s;
-    float: right;
+    text-transform: uppercase;
+    font-size: 14px;
 }
 
-.btn-next:hover {
-    background: rgba(255, 255, 255, 0.2);
+.btn-next:hover, .btn-prev:hover, .btn-animation:hover {
+    background: #ececec;
+    color: #1e40af;
+}
+
+/* Efeito Glow Especial para o Enviar (btn-animation) */
+.btn-animation:hover {
+    box-shadow: 0 0 15px #ececec;
+}
+
+/* --- Lógica dos Steps --- */
+.step {
+    display: none;
+    animation: slideIn 0.4s ease forwards;
+}
+
+.step.active {
+    display: block;
+}
+
+/* --- Animações --- */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 @keyframes slideIn {
-    from { opacity: 0; transform: translateX(20px); }
+    from { opacity: 0; transform: translateX(30px); }
     to { opacity: 1; transform: translateX(0); }
 }
+
+/* --- Responsividade (Mobile) --- */
+@media (max-width: 768px) {
+    .login-box {
+        flex-direction: column; /* Empilha: Logo em cima, Form embaixo */
+        width: 90%;
+        min-height: auto;
+    }
+
+    .logo-side {
+        padding: 30px;
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .logo-img {
+        max-width: 160px;
+    }
+
+    .form-side {
+        padding: 30px 20px;
+    }
+
+    .button-group {
+        flex-direction: column-reverse;
+        gap: 15px;
+    }
+
+    .btn-next, .btn-prev, .btn-animation {
+        width: 100%;
+    }
+}
+
+/* Ajuste para Selects se houver */
+select {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #ececec;
+    color: #ececec;
+    padding: 10px 0;
+    font-family: 'Poppins';
+    outline: none;
+}
+select option { background: #1e40af; color: white; }
 
 @media (max-width: 480px) {
     .login-box {
@@ -240,8 +251,17 @@ body{
 
     /* Ajuste para os botões não ficarem colados na borda */
     .btn-next, .btn-animation {
-        width: 100%; /* Botão ocupa a largura toda no mobile (opcional) */
+        width: 100%;
         float: none;
         margin-top: 20px;
+    }
+
+    .btn-prev{
+        width: 100%;
+    }
+    
+    .button-group {
+        flex-direction: column-reverse; /* Voltar fica embaixo do Próximo no mobile */
+        gap: 15px;
     }
 }
