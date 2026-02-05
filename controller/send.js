@@ -175,7 +175,7 @@ document.getElementById("form").addEventListener("submit", function(e) {
                 "Accept": "application/json"
             },
             body: JSON.stringify({
-                access_key: "8cfc61ff-fb2b-4a53-9c0b-4b72b77694a9",
+                access_key: "d17749ea-64fc-48bc-a4e7-559de48942d4",
                 subject: "Nova Cotação: " + (data.name || "Lead Site"),
                 from_name: "Simulador de Planos",
                 ...data
@@ -192,7 +192,7 @@ document.getElementById("form").addEventListener("submit", function(e) {
         }).then((result) => {
             if(result.isConfirmed){
                 // Link corrigido com 55 e encode
-                window.location.href = 'https://wa.me/5511937269362?text=' + encodeURIComponent('Preenchi minhas informações e gostaria de uma cotação personalizada do meu plano de saúde.');
+                window.location.href = 'https://wa.me/551146205330?text=' + encodeURIComponent('Preenchi minhas informações e gostaria de uma cotação personalizada do meu plano de saúde.');
             }
         });
     })
@@ -208,7 +208,7 @@ document.getElementById("form").addEventListener("submit", function(e) {
             confirmButtonColor: '#25D366'
         }).then((result) => {
             if(result.isConfirmed){
-                window.location.href = 'https://wa.me/5511937269362?text=' + encodeURIComponent('Não consegui concluir o cadastro no site.');
+                window.location.href = 'https://wa.me/551146205330?text=' + encodeURIComponent('Não consegui concluir o cadastro no site.');
             }
         });
         
