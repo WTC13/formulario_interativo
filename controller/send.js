@@ -161,7 +161,12 @@ document.getElementById("form").addEventListener("submit", function(e) {
     const formData = new FormData(this);
     const data = Object.fromEntries(formData.entries());
 
-    fetch("https://script.google.com/macros/s/AKfycbznVxamzwc1PkwoDPayXQuAbvFArVDNJ5jXPKsEZeYTFM8fzSfFA58aWmOa5pExXbhK1g/exec", {
+    const params = new URLSearchParams();
+    for (const key in data) {
+        params.append(key, data[key]);
+    }
+
+    fetch("", {
         method: "POST",
         mode: "no-cors",
         headers: { "Content-Type": "application/json" },
@@ -175,7 +180,7 @@ document.getElementById("form").addEventListener("submit", function(e) {
                 "Accept": "application/json"
             },
             body: JSON.stringify({
-                access_key: "d17749ea-64fc-48bc-a4e7-559de48942d4",
+                access_key: "",
                 subject: "Nova Cotação: " + (data.name || "Lead Site"),
                 from_name: "Simulador de Planos",
                 ...data
@@ -192,7 +197,7 @@ document.getElementById("form").addEventListener("submit", function(e) {
         }).then((result) => {
             if(result.isConfirmed){
                 // Link corrigido com 55 e encode
-                window.location.href = 'https://wa.me/551146205330?text=' + encodeURIComponent('Preenchi minhas informações e gostaria de uma cotação personalizada do meu plano de saúde.');
+                window.location.href = 'https://wa.me/5511970707070?text=' + encodeURIComponent('Preenchi minhas informações e gostaria de uma cotação personalizada do meu plano de saúde.');
             }
         });
     })
@@ -208,7 +213,7 @@ document.getElementById("form").addEventListener("submit", function(e) {
             confirmButtonColor: '#25D366'
         }).then((result) => {
             if(result.isConfirmed){
-                window.location.href = 'https://wa.me/551146205330?text=' + encodeURIComponent('Não consegui concluir o cadastro no site.');
+                window.location.href = 'https://wa.me/5511970707070?text=' + encodeURIComponent('Não consegui concluir o cadastro no site.');
             }
         });
         
